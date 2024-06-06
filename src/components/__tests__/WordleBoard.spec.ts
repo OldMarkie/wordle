@@ -4,6 +4,12 @@ import { DEFEAT_MESSAGE, VICTORY_MESSAGE } from '@/settings'
 
 describe('WordleBoard', () => {
   let wordOfTheDay = "TESTS"
+  let wrapper: ReturnType<typeof mount>;
+  beforeEach(() :void => {
+    wrapper = mount(WordleBoard, {props: {wordOfTheDay}})
+  })
+
+  
   test("a victory messgae appears when the user makes a guess that matches the word of the day", async(): Promise <void>=> {
     const wrapper: VueWrapper = mount(WordleBoard, {props: {wordOfTheDay}})
 

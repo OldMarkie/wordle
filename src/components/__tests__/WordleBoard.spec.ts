@@ -9,25 +9,22 @@ describe('WordleBoard', () => {
     wrapper = mount(WordleBoard, {props: {wordOfTheDay}})
   })
 
+  async function playerSubmitsGuess(guess:string): Promise<void> {
+    const guessInput: DOMWrapper<Element>  = wrapper.find("input[type=text]")
+    await guessInput.setValue(guess)
+    await guessInput.trigger("keydown.enter")
+  }
   
   test("a victory messgae appears when the user makes a guess that matches the word of the day", async(): Promise <void>=> {
-    const wrapper: VueWrapper = mount(WordleBoard, {props: {wordOfTheDay}})
-
-    const guessInput: DOMWrapper<Element>  = wrapper.find("input[type=text]")
-    await guessInput.setValue(wordOfTheDay)
-    await guessInput.trigger("keydown.enter")
-
+    
+    await playerSubmitsGuess(wordOfTheDay)  
     expect(wrapper.text()).toContain(VICTORY_MESSAGE)
 
   })
 
   test("a defeat message appears if the user makes a guess that is incorrect", async (): Promise <void> => {
-    const wrapper: VueWrapper = mount(WordleBoard, {props: {wordOfTheDay}})
-
-    const guessInput: DOMWrapper<Element>  = wrapper.find("input[type=text]")
-    await guessInput.setValue("WRONG")
-    await guessInput.trigger("keydown.enter")
-
+    
+    await playerSubmitsGuess("WRONG")  
     expect(wrapper.text()).toContain(DEFEAT_MESSAGE)
   })
 

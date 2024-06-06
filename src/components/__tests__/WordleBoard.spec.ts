@@ -3,11 +3,12 @@ import WordleBoard from '../WordleBoard.vue'
 import { DEFEAT_MESSAGE, VICTORY_MESSAGE } from '@/settings'
 
 describe('WordleBoard', () => {
+  let wordOfTheDay = "TESTS"
   test("a victory messgae appears when the user makes a guess that matches the word of the day", async(): Promise <void>=> {
-    const wrapper: VueWrapper = mount(WordleBoard, {props: {wordOfTheDay:"TESTS"}})
+    const wrapper: VueWrapper = mount(WordleBoard, {props: {wordOfTheDay}})
 
     const guessInput: DOMWrapper<Element>  = wrapper.find("input[type=text]")
-    await guessInput.setValue("TESTS")
+    await guessInput.setValue(wordOfTheDay)
     await guessInput.trigger("keydown.enter")
 
     expect(wrapper.text()).toContain(VICTORY_MESSAGE)
@@ -15,7 +16,7 @@ describe('WordleBoard', () => {
   })
 
   test("a defeat message appears if the user makes a guess that is incorrect", async (): Promise <void> => {
-    const wrapper: VueWrapper = mount(WordleBoard, {props: {wordOfTheDay:"TESTS"}})
+    const wrapper: VueWrapper = mount(WordleBoard, {props: {wordOfTheDay}})
 
     const guessInput: DOMWrapper<Element>  = wrapper.find("input[type=text]")
     await guessInput.setValue("WRONG")
@@ -26,7 +27,13 @@ describe('WordleBoard', () => {
 
 
 
-  test.todo("no end-of-game message appears if the user has not yet made a guess")
+  test("no end-of-game message appears if the user has not yet made a guess", async (): Promise <void> => {
+    const wrapper: VueWrapper = mount(WordleBoard, {props: {wordOfTheDay}})
+
+    expect(wrapper.text()).not.toContain(VICTORY_MESSAGE)
+    expect(wrapper.text()).not.toContain(DEFEAT_MESSAGE)
+    
+  })
 
 })
  

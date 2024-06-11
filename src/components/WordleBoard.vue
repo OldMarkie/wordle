@@ -4,11 +4,9 @@ import englishWords from "@/englishWordsWith5Letters.json"
 import { ref } from 'vue';
 
 defineProps({
-  wordOfTheDay: {
+  wordOfTheDay: { 
     type: String,
-    validator: (wordGiven: string) => wordGiven.length === 5 
-    && wordGiven.toUpperCase() === wordGiven 
-    && englishWords.includes(wordGiven)
+    validator: (wordGiven: string) => englishWords.includes(wordGiven)
   }
 })
 

@@ -1,6 +1,6 @@
 import { DOMWrapper, VueWrapper, mount } from '@vue/test-utils'
 import WordleBoard from '../WordleBoard.vue'
-import { DEFEAT_MESSAGE, VICTORY_MESSAGE } from '@/settings'
+import { DEFEAT_MESSAGE, VICTORY_MESSAGE, WORD_SIZE } from '@/settings'
 
 describe('WordleBoard', () => {
   let wordOfTheDay = "TESTS"
@@ -66,13 +66,10 @@ describe('WordleBoard', () => {
   })
   
   describe("Player input", () => {
-    test('guesses are limited to ${WORD_SIZE} letters', async() => {
-      await playerSubmitsGuess(wordOfTheDay)
+    test("player guesses are limited to 5 letters", async () => {
+      await playerSubmitsGuess(wordOfTheDay + "EXTRA")
       expect(wrapper.text()).toContain(VICTORY_MESSAGE)
     })
-    test.todo("guesses can only be submitted if they are real words")
-    test.todo("guesses are not case-sensitive")
-    test.todo("guesses can only contain letters")
   })
     
 })

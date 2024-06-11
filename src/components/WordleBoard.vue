@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { DEFEAT_MESSAGE, VICTORY_MESSAGE, WORD_SIZE } from '@/settings';
 import englishWords from "@/englishWordsWith5Letters.json"
-import { computed, ref } from 'vue';
+import { computed, ref, triggerRef } from 'vue';
 
 defineProps({
   wordOfTheDay: { 
@@ -18,12 +18,13 @@ const formattedGuessInProgress = computed<string>({
     return guessInProgress.value ?? ""
   },
   set(rawValue: string) {
-    guessInProgress.value = null
 
     guessInProgress.value = rawValue
                             .slice(0, WORD_SIZE)
                             .toUpperCase()
                             .replace(/[^A-Z]+/gi, "")
+
+    triggerRef(formattedGuessInProgress)
   }
   
 })

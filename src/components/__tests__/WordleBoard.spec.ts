@@ -39,7 +39,7 @@ describe('WordleBoard', () => {
   })
 
   test("If a word of the day does not have excatly 5 chars, a warning is emmited", async () => {
-    vi.spyOn(console, "warn")
+    console.warn = vi.fn()
     mount(WordleBoard, {props: {wordOfTheDay: "FLY"}})
     expect(console.warn).toHaveBeenCalled()
     

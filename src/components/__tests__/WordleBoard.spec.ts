@@ -66,7 +66,7 @@ describe('WordleBoard', () => {
   })
   
   describe("Player input", () => {
-    test('guesses are limited to 5 letters', async() => {
+    test('guesses are limited to ${WORD_SIZE} letters', async() => {
       await playerSubmitsGuess(wordOfTheDay)
       expect(wrapper.text()).toContain(VICTORY_MESSAGE)
     })

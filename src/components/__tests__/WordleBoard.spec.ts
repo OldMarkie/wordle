@@ -66,9 +66,17 @@ describe('WordleBoard', () => {
   })
   
   describe("Player input", () => {
-    test("player guesses are limited to 5 letters", async () => {
+    test('player guesses are limited to '+ WORD_SIZE + ' letters', async () => {
       await playerSubmitsGuess(wordOfTheDay + "EXTRA")
       expect(wrapper.text()).toContain(VICTORY_MESSAGE)
+    })
+
+    test("player guesses can only be submitted if they are real words", async () => {
+      await playerSubmitsGuess("QWERT")
+
+      expect(wrapper.text()).not.toContain(VICTORY_MESSAGE)
+      expect(wrapper.text()).not.toContain(DEFEAT_MESSAGE)
+      
     })
   })
     

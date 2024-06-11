@@ -41,7 +41,13 @@ describe('WordleBoard', () => {
   })
   
   describe("Rules for defining thw word of the day", () => {
-    test("If a word of the day does not have excatly 5 chars, a warning is emmited", async () => {
+    test.each(
+      [
+        "FLY",
+        "tests",
+        "QWERT"
+      ]
+    )("If '%s' is provided, a warning is emmited", async (wordOfTheDay) => {
       console.warn = vi.fn()
       mount(WordleBoard, {props: {wordOfTheDay: "FLY"}})
       expect(console.warn).toHaveBeenCalled()

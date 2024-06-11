@@ -49,21 +49,9 @@ describe('WordleBoard', () => {
       ]
     )("If '%s' is provided, a warning is emmited", async (wordOfTheDay) => {
       console.warn = vi.fn()
-      mount(WordleBoard, {props: {wordOfTheDay: "FLY"}})
+      mount(WordleBoard, {props: {wordOfTheDay: wordOfTheDay}})
       expect(console.warn).toHaveBeenCalled()
       
-    })
-  
-    test("If the word of the day is not all in uppercase, a warning is emmited", async () => {
-      console.warn = vi.fn()
-      mount(WordleBoard, {props: {wordOfTheDay: "tests"}})
-      expect(console.warn).toHaveBeenCalled()
-    })
-  
-    test("If the word of the day is not a real word, a warning is emmited", async () => {
-      console.warn = vi.fn()
-      mount(WordleBoard, {props: {wordOfTheDay: "QWERT"}})
-      expect(console.warn).toHaveBeenCalled()
     })
   
     test("no wraning is emmitted if the word of the day is a real uppercase English word with 5 chars"), async () => {
